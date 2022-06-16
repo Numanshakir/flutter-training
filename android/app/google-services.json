@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "229458532358",
+    "project_id": "flutter-training-6a597",
+    "storage_bucket": "flutter-training-6a597.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229458532358:android:23be0ba97bbee95a298b87",
+        "android_client_info": {
+          "package_name": "com.example.fluttertraining"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229458532358-2io3umo627ukhlfaub14buksbofi11i6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fluttertraining",
+            "certificate_hash": "6517fe57a386780f14b76e2de89b5ad09afd9ee9"
+          }
+        },
+        {
+          "client_id": "229458532358-hd7ghgbbl2ne6al0el8qk96sggtgeelo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHCI-pIjIPPUIMyPhfMpE2F-bv8NlXQfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229458532358-hd7ghgbbl2ne6al0el8qk96sggtgeelo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
