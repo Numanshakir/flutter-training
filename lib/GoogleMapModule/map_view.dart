@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:fluttertraining/GoogleMapModule/location_decode.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-String googleAPiKey = "AIzaSyAE1T__uZWgunPpTJ46Dp2dDlNLqDYjpU0";
+String googleAPiKey = "AIzaSyDt4NdceQbBpNM-6ufQdfYzPxd_BEDcOUQ";
 
 class GoogleMapView extends StatefulWidget {
   const GoogleMapView({Key? key}) : super(key: key);
@@ -28,6 +29,23 @@ class _GoogleMapViewState extends State<GoogleMapView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    location.onLocationChanged.listen((event) {
+      print(event.longitude);
+      print(event.latitude);
+      print(event.heading);
+      addMarker(
+          markerID: "My Location", latLng: LatLng(event.latitude!, event.longitude!));
+    });
+
+    ///Address decode
+    fetchLocationName(LatLng(28.4212, 70.2989));
+
+    addMarker(markerID: "from", latLng: LatLng(28.4212, 70.2989));
+    addMarker(
+      markerID: "to",
+      latLng: LatLng(30.1575, 71.5249),
+    );
     createPolyline(
       polylineID: "poly",
       fromLoc: LatLng(28.4212, 70.2989),
@@ -104,6 +122,7 @@ class _GoogleMapViewState extends State<GoogleMapView> {
         position: latLng,
         markerId: markerId,
         icon: image,
+
         // icon: BitmapDescriptor.defaultMarker,
         infoWindow:
             const InfoWindow(title: "Test", snippet: "this is testing"));
@@ -118,23 +137,41 @@ class _GoogleMapViewState extends State<GoogleMapView> {
       {required String polylineID,
       required LatLng fromLoc,
       required LatLng toLoc}) async {
-    final PolylineId polylineId = PolylineId(polylineID);
+    try {
+      print("result");
+      final PolylineId polylineId = PolylineId(polylineID);
 
-    PolylinePoints polylinePoints = PolylinePoints();
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-        googleAPiKey,
-        PointLatLng(fromLoc.latitude, fromLoc.longitude),
-        PointLatLng(toLoc.latitude, toLoc.longitude));
-    print(result.errorMessage);
+      PolylinePoints polylinePoints = PolylinePoints();
+      print("result1");
+      PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+          googleAPiKey,
+          PointLatLng(fromLoc.latitude, fromLoc.longitude),
+          PointLatLng(toLoc.latitude, toLoc.longitude),
+          travelMode: TravelMode.driving);
+      print("result2");
+      print(result.points);
 
-    final Polyline polyline = Polyline(
-        polylineId: polylineId,
-        color: Colors.black,
-        width: 4,
-        points: [fromLoc, toLoc]);
-    setState(() {
-      polylines[polylineId] = polyline;
-    });
+      List<LatLng> pointsData = result.points
+          .map((e) => LatLng(
+                e.latitude,
+                e.longitude,
+              ))
+          .toList();
+
+      final Polyline polyline = Polyline(
+          polylineId: polylineId,
+          color: Colors.black,
+          width: 4,
+          points: pointsData
+          // points: [fromLoc, toLoc]
+          );
+      setState(() {
+        polylines[polylineId] = polyline;
+      });
+    } catch (e) {
+      print("e");
+      print(e);
+    }
   }
 // createPolyline(
 //     {required String polylineID,

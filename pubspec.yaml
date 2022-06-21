@@ -51,9 +51,11 @@ dependencies:
   path: ^1.8.0
   path_provider: ^2.0.11
   http: ^0.13.4
+  #Google map
   google_maps_flutter: ^2.1.7
   location: ^4.3.0
   flutter_polyline_points: ^1.0.0
+  geocoding: ^2.0.4
 
 dev_dependencies:
   flutter_test:

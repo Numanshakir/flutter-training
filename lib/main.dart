@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertraining/ApisModule/apis_view.dart';
-import 'package:fluttertraining/ChatModule/ViewController/welcome_view_controller.dart';
 import 'package:fluttertraining/ChatModule/Service/local_%20notification_handler.dart';
 import 'package:fluttertraining/GoogleMapModule/map_view.dart';
+import 'package:fluttertraining/Translation/translation.dart';
+import 'package:fluttertraining/Translation/translation_view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -55,6 +55,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translations: Messages(),
+      // your translations
+      locale: Get.deviceLocale,
+      fallbackLocale: Locale('en', 'US'),
+      supportedLocales: [
+        Locale('en', 'US'), // English, no country code
+        Locale('ar', 'AE'), // Spanish, no country code
+      ],
+      // transla
+      // localizationsDelegates: [
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      //   GlobalCupertinoLocalizations.delegate,
+      // ],
+      // home: LocaleView(),
       home: GoogleMapView(),
       // home: TextApis(),
       // home: SplashScreen(),
